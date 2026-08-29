@@ -2,6 +2,19 @@
 using namespace std;
 
 vector<int> G[100];
+vector<bool> mark(100,false);
+
+void DFS_Recursive(int v){
+    cout << v << " ";
+    mark[v] = true;
+
+    for(int i = 0; i < G[v].size(); i++){
+        int w = G[v][i];
+        if(!mark[w]){
+            DFS_Recursive(w);
+        }
+    }
+}
 
 void DFS(int v){
     vector<bool> marked(100,false);
@@ -42,5 +55,7 @@ int main(){
     cin >> start;
     cout << "DFS: ";
     DFS(start);
+    cout << endl << "DFS Recursive: ";
+    DFS_Recursive(start);
 }
 

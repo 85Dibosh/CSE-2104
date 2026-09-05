@@ -41,7 +41,7 @@ void insertL(int val){
             ptr = ptr->link;
         };
         ptr->link = n;
-        
+
     }
 }
 
@@ -63,7 +63,7 @@ void insertA(int pos, int val, bool isPos){
                 n->link = ptr->link;
                 ptr->link = n;
             }
-            
+
         }
     }else{
         struct node* n = create(val);
@@ -151,6 +151,49 @@ void deleteA(int posVal, bool isPos){
             }
         }
     }
+}
+
+void print(){
+    for(struct node* ptr = header; ptr != NULL; ptr = ptr->link){
+        cout << ptr->data << " ";
+    }
+    cout << endl;
+}
+
+void Search(int val){
+    struct node* ptr = header;
+    int pos = 1;
+    while(ptr != NULL){
+        if(ptr->data == val){
+            cout << "Value " << val << "found at pos " << pos << endl;
+        }
+    }
+    ptr = ptr->link;
+    pos++;
+}
+
+void last_node(){
+    if (header == NULL) {
+        cout << "List is empty\n";
+        return;
+    }
+    struct node* ptr = header;
+    while(ptr->link != NULL){
+        ptr = ptr->link;
+    }
+    cout << "Last node value: " << ptr->data << endl;
+}
+
+void prevOf_last_node(){
+    if (header == NULL) {
+        cout << "List is empty\n";
+        return;
+    }
+    struct node* ptr = header;
+    while(ptr->link->link != NULL){
+        ptr = ptr->link;
+    }
+    cout << "Last node value: " << ptr->data << endl;
 }
 int main(){
 

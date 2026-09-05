@@ -16,7 +16,7 @@ struct node* create(int val){
     }
 
     newNode->data = val;
-    new->link = NULL;
+    newNode->link = NULL;
     return newNode;
 }
 
@@ -56,7 +56,7 @@ void insertA(int pos, int val, bool isPos){
             for(int i = 1; i < pos - 1 && ptr->link != NULL; i++){
                 ptr = ptr->link;
             }
-            if(ptr = NULL){
+            if(ptr == NULL){
                 cout << "Invalid POS" << endl;
                 free(n);
             }else{
@@ -67,7 +67,7 @@ void insertA(int pos, int val, bool isPos){
         }
     }else{
         struct node* n = create(val);
-        if(header == NULL && n->data < header->data){
+        if(header == NULL || n->data < header->data){
             n->link = header;
             header = n;
         }else{
@@ -86,7 +86,7 @@ void deleteF(){
         cout << "List Empty." << endl;
     }else{
         struct node* ptr = header;
-        header = NULL;
+        header = header->link;
         free(ptr);
     }
 }
@@ -142,7 +142,7 @@ void deleteA(int posVal, bool isPos){
             while(ptr->link != NULL && ptr->link->data != posVal){
                 ptr = ptr->link;
             }
-            if(ptr->link -- NULL){
+            if(ptr->link == NULL){
                 cout << "Value not Found" << endl;
             }else{
                 struct node* ptr1 = ptr->link;
@@ -166,10 +166,12 @@ void Search(int val){
     while(ptr != NULL){
         if(ptr->data == val){
             cout << "Value " << val << "found at pos " << pos << endl;
+            return;
         }
+        ptr = ptr->link;
+        pos++;
     }
-    ptr = ptr->link;
-    pos++;
+    cout << "Value " << val << " not found" << endl;
 }
 
 void last_node(){
@@ -189,11 +191,15 @@ void prevOf_last_node(){
         cout << "List is empty\n";
         return;
     }
+    if (header->link == NULL) {
+        cout << "Only one node exists in list\n";
+        return;
+    }
     struct node* ptr = header;
     while(ptr->link->link != NULL){
         ptr = ptr->link;
     }
-    cout << "Last node value: " << ptr->data << endl;
+    cout << "Prev Last node value: " << ptr->data << endl;
 }
 int main(){
 
